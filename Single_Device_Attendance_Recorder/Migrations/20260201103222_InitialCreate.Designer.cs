@@ -11,7 +11,7 @@ using Single_Device_Attendance_Recorder.Models;
 namespace Single_Device_Attendance_Recorder.Migrations
 {
     [DbContext(typeof(AttendanceDbContext))]
-    [Migration("20260201094938_InitialCreate")]
+    [Migration("20260201103222_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

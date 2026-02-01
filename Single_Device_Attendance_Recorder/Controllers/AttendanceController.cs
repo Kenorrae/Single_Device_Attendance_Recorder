@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Single_Device_Attendance_Recorder.Models;
-using System;
 using System.Linq;
 
 namespace Single_Device_Attendance_Recorder.Controllers
@@ -8,48 +7,40 @@ namespace Single_Device_Attendance_Recorder.Controllers
     public class AttendanceController : Controller
     {
         private readonly AttendanceDbContext _context;
+
         public AttendanceController(AttendanceDbContext context)
         {
             _context = context;
         }
 
-        // Attendance/Create
+        // GET: Attendance/Create
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            // Pass a single empty record to the form
+            return View(new AttendanceRecord());
         }
 
-        // Attendance/Create
+        // POST: Attendance/Create
         [HttpPost]
-        public IActionResult Create(string studentName, DateTime date, string status)
+        public IActionResult Create(AttendanceRecord record)
         {
-            if (string.IsNullOrWhiteSpace(studentName) || string.IsNullOrWhiteSpace(status))
+            if (ModelState.IsValid)
             {
-                ViewBag.Error = "Student name and status are required.";
-                return View();
+                _context.AttendanceRecords.Add(record);
+                _context.SaveChanges();
+                TempData["Message"] = $"Attendance recorded for {record.StudentName} on {record.Date.ToShortDateString()} as {record.Status}.";
+                return RedirectToAction("View");
             }
-
-            var record = new AttendanceRecord
-            {
-                StudentName = studentName,
-                Date = date,
-                Status = status
-            };
-
-            _context.AttendanceRecords.Add(record);
-            _context.SaveChanges();
-
-            TempData["Message"] = $"Attendance recorded for {studentName} on {date.ToShortDateString()} as {status}.";
-            return RedirectToAction("View");
+            return View(record);
         }
 
-        // Attendance/View
+        // GET: Attendance/View
         [HttpGet]
         public IActionResult View()
         {
             var records = _context.AttendanceRecords.ToList();
-            return View(records);
+            return View(records); // Pass a list to the view
         }
     }
 }
