@@ -4,14 +4,20 @@ namespace Single_Device_Attendance_Recorder.Controllers
 {
     public class HomeController : Controller
     {
+        // GET: Home/Index
         public IActionResult Index()
         {
-            return View(); // Landing page
+            // Show landing page 
+            ViewBag.Message = TempData["Maligayang Araw"];
+            return View();
         }
 
+        // GET: Home/Welcome
         public IActionResult Welcome()
         {
-            return View(); // Welcome page after login
+            // Show welcome page (with optional TempData message)
+            ViewBag.Message = TempData["Welcome"];
+            return View();
         }
     }
 }

@@ -6,16 +6,18 @@
 </head>
 <body>
     <header>
-        <nav style="background-color:#007bff; padding:10px;">
-            <ul style="list-style:none; display:flex; gap:20px; margin:0; padding:0;">
-                <li><a asp-controller="Home" asp-action="Welcome" style="color:white; text-decoration:none;">Home</a></li>
-                <li><a asp-controller="Attendance" asp-action="Create" style="color:white; text-decoration:none;">Record Attendance</a></li>
-                <li><a asp-controller="Attendance" asp-action="View" style="color:white; text-decoration:none;">View Attendance</a></li>
-                <li><a asp-controller="Account" asp-action="Logout" style="color:white; text-decoration:none;">Logout</a></li>
-            </ul>
-        </nav>
+        @if (!(ViewData["HideNavbar"] as bool? ?? false))
+        {
+            <nav style="background-color:#007bff; padding:10px;">
+                <ul style="list-style:none; display:flex; gap:20px; margin:0; padding:0;">
+                    <li><a asp-controller="Home" asp-action="Welcome" style="color:white; text-decoration:none;">Home</a></li>
+                    <li><a asp-controller="Attendance" asp-action="Create" style="color:white; text-decoration:none;">Record Attendance</a></li>
+                    <li><a asp-controller="Attendance" asp-action="View" style="color:white; text-decoration:none;">View Attendance</a></li>
+                    <li><a asp-controller="Account" asp-action="Logout" style="color:white; text-decoration:none;">Logout</a></li>
+                </ul>
+            </nav>
+        }
     </header>
-
 
     <main>
         @RenderBody()
