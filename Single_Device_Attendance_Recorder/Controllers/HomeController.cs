@@ -1,6 +1,4 @@
-using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using Single_Device_Attendance_Recorder.Models;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace Single_Device_Attendance_Recorder.Controllers
 {
@@ -8,18 +6,12 @@ namespace Single_Device_Attendance_Recorder.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return View(); // Landing page
         }
 
-        public IActionResult Privacy()
+        public IActionResult Welcome()
         {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(); // Welcome page after login
         }
     }
 }
